@@ -14,6 +14,9 @@ Expose APIs for user registration, authenticating registered users, check last l
 * JDBC Client
 * Swagger API documentation
 * Spring security
+* Liquibase
+* Docker
+* JWT
 * PostgreSQL
 
 ---
