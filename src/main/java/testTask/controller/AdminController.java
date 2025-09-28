@@ -72,10 +72,10 @@ public class AdminController {
         return ResponseEntity.ok().build();
     }
 
-    @DeleteMapping("/delete/{cardId}")
+    @DeleteMapping("/delete/{userId}/{cardId}")
     @Operation(summary = "delete a card")
-    public ResponseEntity<Void> deleteCard(@PathVariable("cardId") long cardId) {
-        cardService.delete(cardId);
+    public ResponseEntity<Void> deleteCard(@PathVariable("userId") long userId, @PathVariable("cardId") long cardId) {
+        cardService.delete(userId, cardId);
         return ResponseEntity.ok().build();
     }
 

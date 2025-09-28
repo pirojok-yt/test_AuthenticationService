@@ -51,8 +51,8 @@ public class CardService {
     }
 
     @Transactional
-    public void delete(long cardId) {
-        Card card = getById(cardId);
+    public void delete(long userId, long cardId) {
+        Card card = validate(userId, cardId);
         User owner = card.getOwner();
         owner.getCards().remove(card);
         cardRepository.delete(getById(cardId));

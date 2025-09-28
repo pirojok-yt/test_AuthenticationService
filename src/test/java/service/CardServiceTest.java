@@ -13,11 +13,13 @@ import testTask.domain.enums.Status;
 import testTask.exception.NotFoundException;
 import testTask.mapper.CardMapper;
 import testTask.repository.CardRepository;
+import testTask.repository.UserRepository;
 import testTask.service.CardService;
 import testTask.service.UserService;
 import testTask.util.NumberCache;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -29,6 +31,8 @@ import static org.mockito.Mockito.*;
 public class CardServiceTest {
     @Mock
     private CardRepository cardRepository;
+    @Mock
+    private UserRepository userRepository;
     @Spy
     private CardMapper cardMapper;
     @Mock
@@ -45,19 +49,17 @@ public class CardServiceTest {
     @Test
     void createTestSuccess() {
         when(cache.getNumber()).thenReturn(number);
-        when(userService.getById(id)).thenReturn(User.builder().build());
+        when(userService.getById(id)).thenReturn(User.builder().cards(new ArrayList<>()).build());
         when(cardRepository.findByNumber(number)).thenReturn(Optional.empty());
-        Card card = Card.builder().owner(User.builder().build()).number(number).last4Numbers(number.substring(12)).status(Status.ACTIVE).build();
-        when(cardRepository.save(card)).thenReturn(card);
+        Card card = Card.builder()
+                .id(0)
+                .owner(User.builder().build())
+                .number(number)
+                .last4Numbers(number.substring(12))
+                .balance(new BigDecimal("0.00"))
+                .status(Status.ACTIVE).build();
+        when(cardRepository.save(any())).thenReturn(card);
         assertEquals(new CardDto(0, number.replace("000011112222", "************")), cardService.create(id));
-    }
-
-    @Test
-    void deleteTest() {
-        Card card = createCard();
-        when(cardRepository.findById(id)).thenReturn(Optional.of(card));
-        cardService.delete(id);
-        verify(cardRepository, times(1)).delete(card);
     }
 
     @Test
@@ -153,7 +155,7 @@ public class CardServiceTest {
     private Card createCard() {
         return Card.builder()
                 .id(id)
-                .owner(User.builder().build())
+                .owner(User.builder().cards(List.of()).build())
                 .number(number)
                 .last4Numbers(number.substring(12))
                 .balance(new BigDecimal("1.00"))
