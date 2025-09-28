@@ -22,38 +22,24 @@ server:
 
 logging:
   level:
-    root: info
+    org.springframework.security: DEBUG
     
-account:
-  type:
-    CURRENT: 4200
-    SETTLEMENT: 5200
-    CREDIT: 7700
-    DEPOSIT: 1100
-    BUDGET: 3300
+jwt:
+  key: 82822e69f51413f58606474ba4dd0919b1cb1875a611e46470afc9494c89b5cf
+  expiration-seconds: 3600
+
+cards:
+  per-page: 10
+  expire-check:  0 0 * * * *
+  encryption:
+    key: 1234567890123456
+    iv-length: 12
+    algorithm: AES/GCM/NoPadding
+    tag-length: 128
   number:
-    init-zeros: 8
-    generate-per-time: 5000
-    base-number-length: 4
-
-user-service:
-  host: localhost
-  port: 8080
-
-kafka:
-  host: "localhost:9092"
-  topics:
-    prod-request: "producer-requests"
-    cons-request: "consumer-requests"
-  num-partitions: 2
-  replication-factor: 1
-  concurrency: 3
-  group: "requests"
-  trusted-packages: "faang.school.accountservice.dto.CreateRequestDto"
-  properties:
-    security.protocol: SSL
-    ssl.truststore.location: /path/to/truststore.jks
-    ssl.truststore.password: password
-
-cron:
-  expression: "0 * * * * *"
+    bin: 555555
+    length: 16
+    cache:
+      batch: 10
+      min: 10
+      capacity: 100
