@@ -1,3 +1,11 @@
+--liquibase formatted sql
+
+--changeset pirojok:V002_test-service_card
+--preconditions onFail:MARK_RAN
+--precondition-not
+--precondition-table-exists tableName=card
+--endPreconditions
+
 CREATE TABLE card (
     id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
   owner_id BIGINT NOT NULL,

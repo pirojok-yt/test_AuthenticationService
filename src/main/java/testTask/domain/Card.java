@@ -1,18 +1,16 @@
 package testTask.domain;
 
 import jdk.jfr.Timestamp;
+import lombok.*;
 import testTask.domain.enums.Status;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
 import testTask.util.NumberEncryptor;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
-@Data
+@Getter
+@Setter
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
