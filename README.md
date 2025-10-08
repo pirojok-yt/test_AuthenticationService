@@ -1,7 +1,7 @@
 # Test authentication card service
 
 Authentication service is a Spring Boot application to manage user registration and authentication with roles.
-Expose APIs for user registration, authenticating registered users, check last login attempts, and manage cards with encrypted passwords and card numbers.
+Expose APIs for user registration, authenticating registered users, check last login attempts, admin panel, password and card number encryotihng and card service for testing.
 
 ---
 
@@ -10,7 +10,7 @@ Expose APIs for user registration, authenticating registered users, check last l
 * Java 17
 * Spring Boot 3.3.4
 * Gradle
-* Use docker-compose
+* Docker-compose
 * JDBC Client
 * Swagger API documentation
 * Spring security
